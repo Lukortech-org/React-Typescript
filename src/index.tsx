@@ -5,9 +5,13 @@ import Home from "./pages/home";
 import Auth from "./pages/auth";
 import makeServer from "./server";
 
-makeServer();
+
+
+
 
 export default function App() {
+  makeServer();
+  fetch("/api/users")
   return (
     <BrowserRouter>
       <Routes>

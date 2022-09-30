@@ -16,7 +16,7 @@ export default function makeServer() {
         },
 
         routes() {
-            this.namespace = "/mock"
+            //this.namespace = "/mock"
 
             //@ts-ignore
             this.get("/api/users", (schema) => schema.users.all())
