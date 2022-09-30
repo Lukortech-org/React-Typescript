@@ -6,6 +6,7 @@ import Auth from "./pages/auth";
 import makeServer from "./server";
 
 makeServer();
+
 export default function App() {
   return (
     <BrowserRouter>
