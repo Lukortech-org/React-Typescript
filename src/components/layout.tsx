@@ -1,18 +1,16 @@
-//Not sure what is supposed to be here? link was kinda weird
-import "./layout.css";
-import React from "react";
+import { Outlet, Link } from "react-router-dom";
 import DenseAppBar from "./navbar";
-import UseYourImagination from "./useScrollPosition";
+import "./layout.css";
 
+const Layout = () => {
+	return (
+		<>
+			<div className='ImageBgc'>
+				<DenseAppBar></DenseAppBar>
+			</div>
+			<Outlet />
+		</>
+	);
+};
 
- export default class ImageBgc extends React.Component {
-    render(){
-        return(
-             <div className='ImageBgc'>
-                <DenseAppBar></DenseAppBar>
-                <UseYourImagination></UseYourImagination>
-             </div>
-        )
-    }
-    
-}
+export default Layout;

@@ -1,14 +1,12 @@
 import ImageBgc from "./components/layout";
 import "./App.css";
 import DenseAppBar from "./components/navbar";
-import { UseDebounce } from "./components/useDebounce";
+// import { UseDebounce } from "./components/useDebounce";
 
 function App() {
 	return (
-		<div>
-			<ImageBgc>
+		<div className="ImageBgc">
 				<DenseAppBar></DenseAppBar>
-			</ImageBgc>
 		</div>
 	);
 }
