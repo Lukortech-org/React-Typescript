@@ -1,14 +1,26 @@
-import ImageBgc from "./components/layout";
-import "./App.css";
-import DenseAppBar from "./components/navbar";
-// import { UseDebounce } from "./components/useDebounce";
+import { Auth, Home } from './pages';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-function App() {
-	return (
-		<div className="ImageBgc">
-				<DenseAppBar></DenseAppBar>
-		</div>
-	);
-}
+import Layout from './components/Layout/layout';
+import makeServer from './server';
+import { CssBaseline } from '@mui/material';
+
+const App: React.FC = () => {
+  makeServer();
+  fetch('/api/users');
+  return (
+    <>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path='auth' element={<Auth />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+};
 
 export default App;
