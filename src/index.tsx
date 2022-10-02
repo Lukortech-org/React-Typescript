@@ -1,20 +1,28 @@
-// import ReactDOM from 'react-dom/client';
-// import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/layout";
+import Home from "./pages/home";
+import Auth from "./pages/auth";
+import makeServer from "./server";
 
-// const root = ReactDOM.createRoot(
-//   document.getElementById('root') as HTMLElement
-// );
-// root.render(
-//   <h1>Hello world</h1>
-// );
-// reportWebVitals();
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.render((
-<BrowserRouter>
-  <App />
-</BrowserRouter>
-), document.getElementById('root'));
+
+
+
+export default function App() {
+  makeServer();
+  fetch("/api/users")
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="auth" element={<Auth />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(<App />);
