@@ -18,6 +18,7 @@ export default function DenseAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
             Photos
