@@ -1,16 +1,12 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/layout";
-import Home from "./pages/home";
-import Auth from "./pages/auth";
-import makeServer from "./server";
-
-
-
-
+import ReactDOM from "react-dom/client"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./components/layout"
+import Home from "./pages/Home"
+import Auth from "./pages/Auth"
+import makeServer from "./server"
 
 export default function App() {
-  makeServer();
+  makeServer()
   fetch("/api/users")
   return (
     <BrowserRouter>
@@ -21,8 +17,8 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(<App />);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
+root.render(<App />)
