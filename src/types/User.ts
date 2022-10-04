@@ -1,5 +1,5 @@
 export default interface UserI {
-  name: string
+  firstName: string
   lastName: string
   dateOfBirth: Date
   isAdmin: boolean
