@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/layout';
 import makeServer from './server';
 import { CssBaseline } from '@mui/material';
+import React from 'react';
 
 const App: React.FC = () => {
   makeServer();
