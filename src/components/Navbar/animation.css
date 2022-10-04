@@ -1,0 +1,30 @@
+@keyframes appear {
+	from {
+		width: 80%;
+		margin: 36px auto 0;
+		border: 1em;
+		overflow: hidden;
+		animation-timing-function: linear;
+	}
+	to {
+		width: 100%;
+		background-color: #cce5ff;
+		flex: none;
+	}
+}
+
+@keyframes disappear {
+	from {
+		width: 100%;
+		background-color: #cce5ff;
+		flex: none;
+		animation-timing-function: linear;
+	}
+
+	to {
+		width: 80%;
+		margin: 36px auto 0;
+		border: 1em;
+		overflow: hidden;
+	}
+}
