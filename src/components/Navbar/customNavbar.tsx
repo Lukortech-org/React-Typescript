@@ -26,6 +26,9 @@ import { useScrollPosition } from "react-use-scroll-position";
 
 import "./animation.css";
 import { color } from "@mui/system";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import MyComponents from "./animation";
 
 interface NavLinkPropsI {
 	to: string;
@@ -93,137 +96,122 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
 		window !== undefined ? () => window().document.body : undefined;
 
 	return (
-		<Box sx={{ display: "flex" }}>
+		<Box sx={{ display: "flex", overflow: "hidden" }}>
 			{/* TODO: Animation should be here instead of TRANSITION - for @Sebucha to figure it out. */}
-			<AppBar
-				position={y < 50 ? "sticky" : "fixed"}
-				sx={() =>
-					y < 50
-						? {
-								width: "80%",
-								margin: "36px auto 0",
-								borderRadius: "1em",
-								overflow: "hidden",
-								// transition: "all",
-								animation: "disappear",
-								animationDuration: "2s",
-								animationFillMode: "forwards",
-						  }
-						: {
-								// transition: "all",
-								width: "100%",
-								animation: "appear",
-								animationDuration: "2s",
-								animationFillMode: "forwards",
-						  }
-				}>
-				<Container maxWidth='xl'>
-					<Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-						<IconButton
-							color='inherit'
-							aria-label='open drawer'
-							edge='start'
-							onClick={handleDrawerToggle}
-							sx={{ mr: 2, display: { sm: "none" } }}>
-							<MenuIcon />
-						</IconButton>
-						<Box>
-							<img
-								src={logo}
-								alt='logo'
-								style={{
-									height: "auto",
-									width: "100%",
-								}}
-							/>
-						</Box>
-						<Box
-							sx={{
-								flexGrow: 1,
-								display: { xs: "none", md: "flex" },
-								justifyContent: "space-around",
-							}}>
-							{pages.map(page => (
-								<Button
-									key={page.label}
-									sx={{ my: 2, color: "white", display: "block" }}>
-									<Link
-										style={{
-											color: "inherit",
-											textDecoration: "inherit",
-											fontFamily: "inherit",
-										}}
-										to={page.to}>
-										{page.label}
-									</Link>
-								</Button>
-							))}
-						</Box>
-						<Box sx={{ flexGrow: 0 }}>
+			<MyComponents>
+				<AppBar position={y < 50 ? "sticky" : "fixed"}>
+					<Container maxWidth='xl'>
+						<Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+							<IconButton
+								color='inherit'
+								aria-label='open drawer'
+								edge='start'
+								onClick={handleDrawerToggle}
+								sx={{ mr: 2, display: { sm: "none" } }}>
+								<MenuIcon />
+							</IconButton>
 							<Box>
 								<img
-									src={wave}
-									alt='gradient purple wave'
+									src={logo}
+									alt='logo'
 									style={{
-										...{
-											height: "auto",
-											width: "100%",
-											zIndex: -1,
-											position: "absolute",
-										},
-										...(y < 50
-											? {
-													transform: "translate(-62%, -46%) scale(.4)",
-											  }
-											: {
-													transform: "translate(-56%, -56%) scale(.4)",
-											  }),
+										height: "auto",
+										width: "100%",
 									}}
 								/>
-								<Tooltip title='Open settings'>
-									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-										<Avatar
-											alt='Remy Sharp'
-											src='/static/images/avatar/2.jpg'
-										/>
-									</IconButton>
-								</Tooltip>
 							</Box>
+							<Box
+								sx={{
+									flexGrow: 1,
+									display: { xs: "none", md: "flex" },
+									justifyContent: "space-around",
+								}}>
+								{pages.map(page => (
+									<Button
+										key={page.label}
+										sx={{ my: 2, color: "white", display: "block" }}>
+										<Link
+											style={{
+												color: "inherit",
+												textDecoration: "inherit",
+												fontFamily: "inherit",
+											}}
+											to={page.to}>
+											{page.label}
+										</Link>
+									</Button>
+								))}
+							</Box>
+							<Box sx={{ flexGrow: 0 }}>
+								<Box>
+									<img
+										src={wave}
+										alt='gradient purple wave'
+										style={{
+											...{
+												height: "auto",
+												width: "90%",
+												zIndex: -1,
+												position: "absolute",
+												backgroundPosition: "center",
+												backgroundSize: "cover",
+												backgroundAttachment: "fixed",
+												align: "baseline",
+											},
+											...(y < 50
+												? {
+														transform: "translate(-62%, -46%) scale(.4)",
+												  }
+												: {
+														transform: "translate(-56%, -56%) scale(.4)",
+												  }),
+										}}
+									/>
+									<Tooltip title='Open settings'>
+										<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+											<Avatar
+												alt='Remy Sharp'
+												src='/static/images/avatar/2.jpg'
+											/>
+										</IconButton>
+									</Tooltip>
+								</Box>
 
-							<Menu
-								sx={{ mt: "45px" }}
-								id='menu-appbar'
-								anchorEl={anchorElUser}
-								anchorOrigin={{
-									vertical: "top",
-									horizontal: "right",
-								}}
-								keepMounted
-								transformOrigin={{
-									vertical: "top",
-									horizontal: "right",
-								}}
-								open={Boolean(anchorElUser)}
-								onClose={handleCloseUserMenu}>
-								{settings.map((setting, index) =>
-									index !== setting.length - 1 ? (
-										<MenuItem key={setting} onClick={handleCloseUserMenu}>
-											<Typography textAlign='center'>{setting}</Typography>
-										</MenuItem>
-									) : (
-										<>
-											<Divider variant='middle' />
+								<Menu
+									sx={{ mt: "45px" }}
+									id='menu-appbar'
+									anchorEl={anchorElUser}
+									anchorOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									keepMounted
+									transformOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									open={Boolean(anchorElUser)}
+									onClose={handleCloseUserMenu}>
+									{settings.map((setting, index) =>
+										index !== setting.length - 1 ? (
 											<MenuItem key={setting} onClick={handleCloseUserMenu}>
 												<Typography textAlign='center'>{setting}</Typography>
 											</MenuItem>
-										</>
-									)
-								)}
-							</Menu>
-						</Box>
-					</Toolbar>
-				</Container>
-			</AppBar>
+										) : (
+											<>
+												<Divider variant='middle' />
+												<MenuItem key={setting} onClick={handleCloseUserMenu}>
+													<Typography textAlign='center'>{setting}</Typography>
+												</MenuItem>
+											</>
+										)
+									)}
+								</Menu>
+							</Box>
+						</Toolbar>
+					</Container>
+				</AppBar>
+			</MyComponents>
 
 			<Box component='nav'>
 				<Drawer
