@@ -3,6 +3,7 @@ import faker from "faker"
 import UserI from "./types/User"
 import Schema from 'miragejs/orm/schema'
 import { FactoryDefinition, ModelDefinition } from 'miragejs/-types'
+import { allowedNodeEnvironmentFlags } from "process"
 
 const UserModel: ModelDefinition<UserI> = Model.extend({});
 const UserFactory: FactoryDefinition<UserI> = Factory.extend({
@@ -33,7 +34,7 @@ type AppSchema = Schema<AppRegistry>;
 
 export default function makeServer() {
   createServer({
-    logging: true,
+    //logging: true,
     // When we work on certain model (eg. user here) we can provide it's properties via <UserModel>
     models: {
       user: UserModel
@@ -55,8 +56,8 @@ export default function makeServer() {
         const {page, limit} = req.params
         // gdzie limit 5,10,25
         // page : w zaleznosci od tego ile jest rekordów / limit
-
-        return schema.all("user").slice(Number(page) * Number(limit), Number(page) * Number(limit) + Number(limit))
+        return schema.all("user").slice(Number(page) * Number(limit), Number(page) * Number(limit) + Number(limit));
+        //return schema.all("user").slice(Number(page) * Number(limit), Number(page) * Number(limit) + Number(limit))
         // wszyscy uzytkownicy z zakresu strony 20-30
         // fetch("/api/users/2/10")
       })
