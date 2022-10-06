@@ -1,3 +1,5 @@
+import "./animation.css";
+
 import * as React from "react";
 
 import AppBar from "@mui/material/AppBar";
@@ -16,19 +18,16 @@ import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import MyComponents from "./animation";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import logo from "../../images/logo.svg";
-import wave from "../../images/wave.png";
-
-import { useScrollPosition } from "react-use-scroll-position";
-
-import "./animation.css";
 import { color } from "@mui/system";
+import logo from "../../images/logo.svg";
 import { motion } from "framer-motion";
+import { useScrollPosition } from "react-use-scroll-position";
 import { useState } from "react";
-import MyComponents from "./animation";
+import wave from "../../images/wave.png";
 
 interface NavLinkPropsI {
 	to: string;
@@ -153,10 +152,10 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
 												width: "90%",
 												zIndex: -1,
 												position: "absolute",
-												backgroundPosition: "center",
-												backgroundSize: "cover",
-												backgroundAttachment: "fixed",
-												align: "baseline",
+												// backgroundPosition: "center",
+												// backgroundSize: "cover",
+												// backgroundAttachment: "fixed",
+												// align: "baseline",
 											},
 											...(y < 50
 												? {
