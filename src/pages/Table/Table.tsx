@@ -1,8 +1,3 @@
-// import React from 'react';
-// const Table = () => {
-//     return <h1>Table</h1>;
-// };
-// export default Table;
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,26 +7,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import makeServer from '../../server';
+import { useState } from "react";
 
-const page = 1;
-const limit = 10;
+
+//variables
+let page = -1;
+let limit = 10;
 const rows:any = [];
+
+//make server
 makeServer();
-//const response = fetch('/api/users/1/10');
-//console.log(response.user.firstName)
-async function getapi(url:string) {
-    // Storing response
-    const response = await fetch(url); 
-    // Storing data in form of JSON
-    let data = await response.json();
-
-    data.users.forEach((user: { firstName: string; lastName: string; dateOfBirth: string; isAdmin: boolean; }) => {
-      rows.push(createData(user.firstName, user.lastName, user.dateOfBirth, user.isAdmin));
-    });
-    debugger;
-
-}
-
+//create data function
 function createData(
   firstName: string,
   lastName: string,
@@ -40,13 +26,30 @@ function createData(
 ) {
   return { firstName, lastName, dob, isAdmin,};
 }
-getapi('/api/users/'+page+'/'+limit);
 
-// const rows = [
-//   createData('Frozen yoghurt', "woah", "ashjbf", true ),
-// ];
+//get api function with a lot of
+
+
+
+
 
 export default function BasicTable() {
+  const [data, setData] = useState([])
+  async function getapi(url:string) {
+    // Storing response
+    const response = await fetch(url); 
+    // Storing data in form of JSON
+    let data = await response.json();
+  
+    data.users.forEach((user: { firstName: string; lastName: string; dateOfBirth: string; isAdmin: boolean; }) => {
+      rows.push(createData(user.firstName, user.lastName, user.dateOfBirth, user.isAdmin));
+    });
+    setData(rows);
+    debugger;
+  }
+  getapi('api/users/'+page+'/'+limit)
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -59,7 +62,7 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row:any) => (
+          {data.map((row:any) => (
             <TableRow
               key={row.firstName}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
