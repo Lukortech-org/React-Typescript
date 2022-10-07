@@ -13,7 +13,7 @@ import { useState } from "react";
 //variables
 let page = -1;
 let limit = 10;
-const rows:any = [];
+let rows:any = [];
 
 //make server
 makeServer();
@@ -27,12 +27,6 @@ function createData(
   return { firstName, lastName, dob, isAdmin,};
 }
 
-//get api function with a lot of
-
-
-
-
-
 export default function BasicTable() {
   const [data, setData] = useState([])
   async function getapi(url:string) {
@@ -40,15 +34,21 @@ export default function BasicTable() {
     const response = await fetch(url); 
     // Storing data in form of JSON
     let data = await response.json();
-  
+    //pushing data in order
     data.users.forEach((user: { firstName: string; lastName: string; dateOfBirth: string; isAdmin: boolean; }) => {
       rows.push(createData(user.firstName, user.lastName, user.dateOfBirth, user.isAdmin));
     });
     setData(rows);
     debugger;
   }
-  getapi('api/users/'+page+'/'+limit)
-
+  //function for getting table filled for the irst time
+  const startFill =()=>{
+    if(page === -1){
+      page=0;
+      getapi('api/users/'+page+'/'+limit)
+    }
+  }
+  startFill();
 
   return (
     <TableContainer component={Paper}>
@@ -72,11 +72,27 @@ export default function BasicTable() {
               </TableCell>
               <TableCell>{row.lastName}</TableCell>
               <TableCell>{row.dob}</TableCell>
-              <TableCell>{row.isAdmin}</TableCell>
+              <TableCell>{(row.isAdmin === true)? 'Yes' : 'No'}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <button onClick={() =>{
+        //Previous page button
+        if(page>0){
+          page=page-1;
+          rows = [];
+            getapi('api/users/'+page+'/'+limit)
+        }
+      }}>Prev</button>
+      <button onClick={() =>{
+        //Next page button
+        if(page<9){
+          page=page+1;
+          rows = [];
+            getapi('api/users/'+page+'/'+limit)
+        }
+      }}>Next</button>
     </TableContainer>
   );
 }
