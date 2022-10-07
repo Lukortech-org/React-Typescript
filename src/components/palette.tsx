@@ -1,11 +1,15 @@
 import * as React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import { AppBar } from '@mui/material';
 import Button from '@mui/material/Button';
 
 const theme = createTheme({
     palette: {
+      mode: "light",
       primary: {
-        light: '#757ce8',
+        light: '#cce5ff',
         main: '#3f50b5',
         dark: '#002884',
         contrastText: '#fff',
@@ -19,11 +23,15 @@ const theme = createTheme({
     },
   });
 
-export default function Palette() {
+  
+  type PaletteProps = {
+    children: React.ReactNode; // 👈️ type children
+  };
+export default function Palette(props: PaletteProps) {
+  
   return (
     <ThemeProvider theme={theme}>
-      <Button>Primary</Button>
-      <Button color="secondary">Secondary</Button>
+      <div style={{ color: "primary.light"}}>{props.children}</div>
     </ThemeProvider>
   );
 }

@@ -19,6 +19,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MyComponents from "./animation";
+import Palette from "../palette";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -98,7 +99,8 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
 		<Box sx={{ display: "flex", overflow: "hidden" }}>
 			{/* TODO: Animation should be here instead of TRANSITION - for @Sebucha to figure it out. */}
 			<MyComponents>
-				<AppBar position={y < 50 ? "sticky" : "fixed"}>
+				<Palette>
+				<AppBar  style={{color: "primary.main"}} position={y < 50 ? "sticky" : "fixed"}>
 					<Container maxWidth='xl'>
 						<Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
 							<IconButton
@@ -149,20 +151,20 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
 										style={{
 											...{
 												height: "auto",
-												width: "90%",
+												width: "auto",
 												zIndex: -1,
 												position: "absolute",
-												// backgroundPosition: "center",
-												// backgroundSize: "cover",
-												// backgroundAttachment: "fixed",
-												// align: "baseline",
 											},
 											...(y < 50
 												? {
 														transform: "translate(-62%, -46%) scale(.4)",
 												  }
 												: {
-														transform: "translate(-56%, -56%) scale(.4)",
+														transform: "translate(-56%, -56%) scale(.475)",
+														height: "auto",
+														width: "auto",
+														zIndex: -1,
+														position: "absolute",														
 												  }),
 										}}
 									/>
@@ -210,6 +212,7 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
 						</Toolbar>
 					</Container>
 				</AppBar>
+				</Palette>
 			</MyComponents>
 
 			<Box component='nav'>
