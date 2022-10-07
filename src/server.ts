@@ -3,7 +3,6 @@ import faker from "faker"
 import UserI from "./types/User"
 import Schema from 'miragejs/orm/schema'
 import { FactoryDefinition, ModelDefinition } from 'miragejs/-types'
-import { allowedNodeEnvironmentFlags } from "process"
 
 const UserModel: ModelDefinition<UserI> = Model.extend({});
 const UserFactory: FactoryDefinition<UserI> = Factory.extend({
@@ -49,22 +48,20 @@ export default function makeServer() {
     },
 
     routes() {
-      this.namespace = "api"
-      this.get("/users/:page/:limit", (schema:AppSchema, req) => {
-        // TODO: expand this request to give us a chance to filter out users 1-10 etc.
-        // https://miragejs.com/docs/main-concepts/route-handlers/#dynamic-paths-and-query-params
-        const {page, limit} = req.params
-        // gdzie limit 5,10,25
-        // page : w zaleznosci od tego ile jest rekordów / limit
-        return schema.all("user").slice(Number(page) * Number(limit), Number(page) * Number(limit) + Number(limit));
-        //return schema.all("user").slice(Number(page) * Number(limit), Number(page) * Number(limit) + Number(limit))
-        // wszyscy uzytkownicy z zakresu strony 20-30
-        // fetch("/api/users/2/10")
+      this.namespace = "api";
+      this.get("/users/:page/:limit", (schema: AppSchema, req) => {
+        const { page, limit } = req.params
+        const start = Number(page) * Number(limit)
+        const stop = Number(page) * Number(limit) + Number(limit)
+
+        return {
+          users: schema.all("user").slice(start, stop),
+          totalEntries: schema.all("user").length,
+        }
       })
-      // Those are good to go
-      this.get("/user/:id", (schema:AppSchema, req) => schema.where("user", {id:req.params.id}))
-      this.post("/generate_user", (schema:AppSchema, req)=> schema.create("user"))
-      this.delete("/user/:id", (schema:AppSchema, req)=> schema.where("user", {id:req.params.id}).destroy())
+      this.get("/user/:id", (schema: AppSchema, req) => schema.where("user", { id: req.params.id }))
+      this.post("/generate_user", (schema: AppSchema, req) => schema.create("user"))
+      this.delete("/user/:id", (schema: AppSchema, req) => schema.where("user", { id: req.params.id }).destroy())
     },
   })
 }
