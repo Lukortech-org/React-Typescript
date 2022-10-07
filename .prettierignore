@@ -1,0 +1,8 @@
+node_modules
+build
+public
+package-lock.json
+helm
+cypress-coverage
+coverage
+styles.css
