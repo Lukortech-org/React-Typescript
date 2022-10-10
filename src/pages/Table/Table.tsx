@@ -25,7 +25,7 @@ export default function BasicTable() {
   };
   const [data, setData] = useState<DataI>(initialDataState);
   const [params, setParams] = useState<ParamsI>({
-    page: 1,
+    page: 0,
     limit: 10,
   });
 
@@ -47,13 +47,13 @@ export default function BasicTable() {
   };
 
   const handleNextPage = () => {
-    if (params.page < Math.floor(data.totalEntries / params.limit)) {
+    if (params.page < Math.ceil((data.totalEntries / params.limit)-1)) {
       setParams((prevState) => ({ ...prevState, page: prevState.page + 1 }));
     }
   };
 
   const handleLimitChange = (e: { target: { value: string } }) => {
-    setParams((prevState) => ({ ...prevState, limit: Number(e.target.value) }));
+    setParams((prevState) => ({ ...prevState, limit: Number(e.target.value), page: 0 }));
   };
 
   return (
@@ -70,7 +70,7 @@ export default function BasicTable() {
         <TableBody>
           {data.users.map((row: any) => (
             <TableRow
-              key={row.firstName}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component='th' scope='row'>

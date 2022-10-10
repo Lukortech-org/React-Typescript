@@ -44,7 +44,7 @@ export default function makeServer() {
     },
     // Initial start of the server will generate some data for us with seed method
     seeds(server) {
-      server.createList("user", 100)
+      server.createList("user", 102)
     },
 
     routes() {
