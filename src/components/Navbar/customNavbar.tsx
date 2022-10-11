@@ -33,6 +33,7 @@ interface NavLinkPropsI {
 const pages: NavLinkPropsI[] = [
   { label: 'Home', to: '/home' },
   { label: 'About', to: '/about' },
+  { label: 'Table', to: '/table' },
   { label: 'Pricing', to: '/pricing' },
 ];
 const settings = ['Profile', 'Settings', 'Logout'];
