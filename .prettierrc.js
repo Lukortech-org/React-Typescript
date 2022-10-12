@@ -7,5 +7,5 @@ module.exports = {
   tabWidth: 2,
   trailingComma: "es5",
   useTabs: false,
-  endOfLine: "lf",
+  endOfLine: "crlf",
 }
