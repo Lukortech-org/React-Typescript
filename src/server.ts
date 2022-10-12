@@ -1,34 +1,34 @@
-import { createServer, Model, Factory, Registry } from "miragejs";
-import faker from "faker";
-import UserI from "./types/User";
-import Schema from "miragejs/orm/schema";
-import { FactoryDefinition, ModelDefinition } from "miragejs/-types";
+import { createServer, Model, Factory, Registry } from "miragejs"
+import faker from "faker"
+import UserI from "./types/User"
+import Schema from "miragejs/orm/schema"
+import { FactoryDefinition, ModelDefinition } from "miragejs/-types"
 
-const UserModel: ModelDefinition<UserI> = Model.extend({});
+const UserModel: ModelDefinition<UserI> = Model.extend({})
 const UserFactory: FactoryDefinition<UserI> = Factory.extend({
   firstName() {
-    return faker.name.firstName();
+    return faker.name.firstName()
   },
   lastName() {
-    return faker.name.lastName();
+    return faker.name.lastName()
   },
   dateOfBirth() {
-    return faker.date.past(30);
+    return faker.date.past(30)
   },
   isAdmin() {
-    return faker.random.boolean();
+    return faker.random.boolean()
   },
-});
+})
 
 type AppRegistry = Registry<
   {
-    user: typeof UserModel;
+    user: typeof UserModel
   },
   {
-    user: typeof UserFactory;
+    user: typeof UserFactory
   }
->;
-type AppSchema = Schema<AppRegistry>;
+>
+type AppSchema = Schema<AppRegistry>
 
 export default function makeServer() {
   createServer({
@@ -43,30 +43,30 @@ export default function makeServer() {
     },
     // Initial start of the server will generate some data for us with seed method
     seeds(server) {
-      server.createList("user", 102);
+      server.createList("user", 102)
     },
 
     routes() {
-      this.namespace = "api";
+      this.namespace = "api"
       this.get("/users/:page/:limit", (schema: AppSchema, req) => {
-        const { page, limit } = req.params;
-        const start = Number(page) * Number(limit);
-        const stop = Number(page) * Number(limit) + Number(limit);
+        const { page, limit } = req.params
+        const start = Number(page) * Number(limit)
+        const stop = Number(page) * Number(limit) + Number(limit)
 
         return {
           users: schema.all("user").slice(start, stop),
           totalEntries: schema.all("user").length,
-        };
-      });
+        }
+      })
       this.get("/user/:id", (schema: AppSchema, req) =>
         schema.where("user", { id: req.params.id })
-      );
+      )
       this.post("/generate_user", (schema: AppSchema, req) =>
         schema.create("user")
-      );
+      )
       this.delete("/user/:id", (schema: AppSchema, req) =>
         schema.where("user", { id: req.params.id }).destroy()
-      );
+      )
     },
-  });
+  })
 }

@@ -1,6 +1,9 @@
 export default interface UserI {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  isAdmin: boolean;
+  firstName: string
+
+  lastName: string
+
+  dateOfBirth: Date
+
+  isAdmin: boolean
 }

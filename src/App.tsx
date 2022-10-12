@@ -1,17 +1,14 @@
-import { Auth, Home, Table } from "./pages";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import Layout from "./components/Layout/layout";
-//import makeServer from './server';
-import { CssBaseline } from "@mui/material";
-import React from "react";
+import { Auth, Home, Table } from "./pages"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Layout from "./components/Layout/layout"
+import { CssBaseline } from "@mui/material"
+import React from "react"
 
 const App: React.FC = () => {
-  //makeServer();
-  //fetch('/api/users/1/10');
   return (
     <>
       <CssBaseline />
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -22,7 +19,7 @@ const App: React.FC = () => {
         </Routes>
       </BrowserRouter>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

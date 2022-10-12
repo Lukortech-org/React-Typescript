@@ -1,7 +1,10 @@
-import "./layout.css";
+import "./layout.css"
 
-import CustomNavbar from "../Navbar/customNavbar";
-import { Outlet } from "react-router-dom";
+import CustomNavbar from "../Navbar/customNavbar"
+
+import { Outlet } from "react-router-dom"
+
+import React from "react"
 
 const Layout = () => {
   return (
@@ -9,9 +12,10 @@ const Layout = () => {
       <div className="ImageBgc">
         <CustomNavbar />
       </div>
+
       <Outlet />
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
