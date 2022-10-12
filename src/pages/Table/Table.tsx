@@ -99,6 +99,7 @@ export default function BasicTable() {
         <option value="20">20</option>
         <option value="25">25</option>
       </select>
+      <p>{(params.page*params.limit)+1} - {(params.page*params.limit +params.limit) > data.totalEntries ? data.totalEntries : (params.page*params.limit +params.limit)} from {data.totalEntries}</p>
     </TableContainer>
   )
 }
