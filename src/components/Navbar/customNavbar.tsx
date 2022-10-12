@@ -1,41 +1,69 @@
 import * as React from "react"
 
 import AppBar from "@mui/material/AppBar"
+
 import Avatar from "@mui/material/Avatar"
+
 import Box from "@mui/material/Box"
+
 import Button from "@mui/material/Button"
+
 import Container from "@mui/material/Container"
+
 import Divider from "@mui/material/Divider"
+
 import Drawer from "@mui/material/Drawer"
+
 import IconButton from "@mui/material/IconButton"
+
 import { Link } from "react-router-dom"
+
 import List from "@mui/material/List"
+
 import ListItem from "@mui/material/ListItem"
+
 import ListItemButton from "@mui/material/ListItemButton"
+
 import ListItemText from "@mui/material/ListItemText"
+
 import Menu from "@mui/material/Menu"
+
 import MenuIcon from "@mui/icons-material/Menu"
+
 import MenuItem from "@mui/material/MenuItem"
+
 import Toolbar from "@mui/material/Toolbar"
+
 import Tooltip from "@mui/material/Tooltip"
+
 import Typography from "@mui/material/Typography"
+
 import logo from "../../images/logo.svg"
+
 import wave from "../../images/wave.png"
 
 import { useScrollPosition } from "react-use-scroll-position"
 
 interface NavLinkPropsI {
   to: string
+
   label: string
+
   children?: NavLinkPropsI[]
 }
 
 const pages: NavLinkPropsI[] = [
   { label: "Home", to: "/home" },
+
   { label: "About", to: "/about" },
+
+  { label: "Table", to: "/table" },
+
   { label: "Pricing", to: "/pricing" },
 ]
+
 const settings = ["Profile", "Settings", "Logout"]
+
 const drawerWidth = 240
 
 export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
@@ -44,6 +72,7 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
+
   const { y } = useScrollPosition()
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -65,7 +94,9 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
       <Typography variant="h6" sx={{ my: 2 }}>
         Lukortech-org
       </Typography>
+
       <Divider />
+
       <List>
         {pages.map((page) => (
           <ListItem key={page.label} disablePadding>
@@ -93,15 +124,20 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
   return (
     <Box sx={{ display: "flex" }}>
       {/* TODO: Animation should be here instead of TRANSITION - for @Sebucha to figure it out. */}
+
       <AppBar
         position={y < 50 ? "sticky" : "fixed"}
         sx={() =>
           y < 50
             ? {
                 width: "80%",
+
                 margin: "36px auto 0",
+
                 borderRadius: "1em",
+
                 overflow: "hidden",
+
                 transition: "all",
               }
             : {
@@ -120,20 +156,25 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
             >
               <MenuIcon />
             </IconButton>
+
             <Box>
               <img
                 src={logo}
                 alt="logo"
                 style={{
                   height: "auto",
+
                   width: "100%",
                 }}
               />
             </Box>
+
             <Box
               sx={{
                 flexGrow: 1,
+
                 display: { xs: "none", md: "flex" },
+
                 justifyContent: "space-around",
               }}
             >
@@ -145,7 +186,9 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
                   <Link
                     style={{
                       color: "inherit",
+
                       textDecoration: "inherit",
+
                       fontFamily: "inherit",
                     }}
                     to={page.to}
@@ -155,6 +198,7 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
                 </Button>
               ))}
             </Box>
+
             <Box sx={{ flexGrow: 0 }}>
               <Box>
                 <img
@@ -163,10 +207,14 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
                   style={{
                     ...{
                       height: "auto",
+
                       width: "100%",
+
                       zIndex: -1,
+
                       position: "absolute",
                     },
+
                     ...(y < 50
                       ? {
                           transform: "translate(-62%, -46%) scale(.4)",
@@ -176,6 +224,7 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
                         }),
                   }}
                 />
+
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
@@ -192,11 +241,13 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
                 anchorEl={anchorElUser}
                 anchorOrigin={{
                   vertical: "top",
+
                   horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
                   vertical: "top",
+
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
@@ -210,6 +261,7 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
                   ) : (
                     <>
                       <Divider variant="middle" />
+
                       <MenuItem key={setting} onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
@@ -233,8 +285,10 @@ export const ResponsiveAppBarFullWidth: React.FC<{ window?: () => Window }> = ({
           }}
           sx={{
             display: { xs: "block", sm: "none" },
+
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
+
               width: drawerWidth,
             },
           }}

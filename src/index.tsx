@@ -1,7 +1,7 @@
-import makeServer from "./server"
 import App from "./App"
 import React from "react"
 import ReactDOM from "react-dom/client"
+import makeServer from "./server"
 
 makeServer()
 
