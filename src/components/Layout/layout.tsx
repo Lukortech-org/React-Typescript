@@ -1,17 +1,36 @@
-import './layout.css';
+import "./layout.css"
 
-import CustomNavbar from '../Navbar/customNavbar';
-import { Outlet } from 'react-router-dom';
+import { ThemeProvider, createTheme } from "@mui/material/styles"
+
+import CustomContainer from "../Navbar/customContainer"
+import CustomNavbar from "../Navbar/customNavbar"
+import { Outlet } from "react-router-dom"
+import React from "react"
+import Section from "../section/section"
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#cce5ff",
+    },
+  },
+})
 
 const Layout = () => {
   return (
     <>
-      <div className='ImageBgc'>
-        <CustomNavbar />
-      </div>
-      <Outlet />
-    </>
-  );
-};
+      <ThemeProvider theme={theme}>
+        <Section>
+          <div>
+            <CustomNavbar />
 
-export default Layout;
+            <CustomContainer />
+          </div>
+        </Section>
+        <Outlet />
+      </ThemeProvider>
+    </>
+  )
+}
+
+export default Layout
