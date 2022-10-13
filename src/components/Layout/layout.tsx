@@ -1,5 +1,3 @@
-import "./layout.css"
-
 import CustomNavbar from "../Navbar/customNavbar"
 
 import { Outlet } from "react-router-dom"
