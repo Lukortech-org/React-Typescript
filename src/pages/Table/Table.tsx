@@ -7,7 +7,6 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import UserI from "../../types/User"
-import "./table.css"
 
 interface ParamsI {
   page: number
