@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import UserI from "../../types/User"
+import "./table.css"
 
 interface ParamsI {
   page: number
@@ -99,7 +100,13 @@ export default function BasicTable() {
         <option value="20">20</option>
         <option value="25">25</option>
       </select>
-      <p>{(params.page*params.limit)+1} - {(params.page*params.limit +params.limit) > data.totalEntries ? data.totalEntries : (params.page*params.limit +params.limit)} from {data.totalEntries}</p>
+      <p>
+        {params.page * params.limit + 1} -{" "}
+        {params.page * params.limit + params.limit > data.totalEntries
+          ? data.totalEntries
+          : params.page * params.limit + params.limit}{" "}
+        from {data.totalEntries}
+      </p>
     </TableContainer>
   )
 }
